@@ -22,12 +22,14 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/signin").permitAll()
                 .antMatchers("/public/**").hasRole("NORMAL")
                 .antMatchers("/users/**").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()
-                .formLogin();
+                .formLogin()
+                .loginPage("/signin");
 
     }
 
